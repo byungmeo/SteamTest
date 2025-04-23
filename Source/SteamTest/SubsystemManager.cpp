@@ -178,6 +178,11 @@ void USubsystemManager::OnFindSessionComplete_Internal(bool bWasSuccessful)
 		// Session 찾음
 		if (SettingsValue == IdentifierValue)
 		{
+			auto& SearchResultRef = const_cast<FOnlineSessionSearchResult&>(Result);
+			auto& SessionSettings = SearchResultRef.Session.SessionSettings;
+			SessionSettings.bUsesPresence = true;
+			SessionSettings.bUseLobbiesIfAvailable = true;
+			
 			if (!bBroadcastFirstSession)
 			{
 				// 첫번째 세션만 반환

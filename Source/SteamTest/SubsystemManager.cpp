@@ -55,10 +55,10 @@ void USubsystemManager::CreateSession()
 
 	// Presence로 참가할 수 있는지 여부, Presence : 게임을 찾을 때 같은 지역의 플레이어만 참가할 수 있도록 하는 것
 	// Steam 친구만 게임에 참가할 수 있다.
-	LastSessionSettings->bAllowJoinViaPresenceFriendsOnly = true;
+	// LastSessionSettings->bAllowJoinViaPresenceFriendsOnly = true;
 
 	// 세션에 초대할 수 있는지
-	LastSessionSettings->bAllowInvites = true;
+	// LastSessionSettings->bAllowInvites = true;
 	
 	// 스팀이 세션을 광고하여 다른 플레이어가 세션을 찾아서 참가할 수 있는지 여부
 	LastSessionSettings->bShouldAdvertise = true;
@@ -126,10 +126,14 @@ void USubsystemManager::FindSessions()
     LastSessionSearch->MaxSearchResults = 10000; // TODO : Parameterize?	
 	
 	LastSessionSearch->bIsLanQuery = IOnlineSubsystem::Get()->GetSubsystemName() == TEXT("NULL");
+
+	LastSessionSearch->QuerySettings.Set(SEARCH_LOBBIES, true, EOnlineComparisonOp::Equals);
 	
 	// 우리가 찾는 세션이 Presence를 사용하는 것을 명시하도록 쿼리세팅 설정
-    LastSessionSearch->QuerySettings.Set(SEARCH_PRESENCE, true, EOnlineComparisonOp::Equals);	
+    // astSessionSearch->QuerySettings.Set(SEARCH_PRESENCE, true, EOnlineComparisonOp::Equals);	
 
+	LastSessionSearch->QuerySettings.Set(FName(TEXT("Identifier")), FString(TEXT("byungmeo")), EOnlineComparisonOp::Equals);
+	
     if (const ULocalPlayer* LocalPlayer = GetWorld()->GetFirstLocalPlayerFromController())
     {
     	if (!SessionInterface->FindSessions(*LocalPlayer->GetPreferredUniqueNetId(), LastSessionSearch.ToSharedRef()))

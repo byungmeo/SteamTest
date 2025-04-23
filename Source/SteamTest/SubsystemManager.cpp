@@ -97,6 +97,7 @@ void USubsystemManager::OnCreateSessionComplete_Internal(FName SessionName, bool
 		SessionInterface->ClearOnCreateSessionCompleteDelegate_Handle(OnCreateSessionCompleteDelegateHandle);
 	}
 
+	/*
 	if (bWasSuccessful)
 	{
 		if (UWorld* World = GetWorld())
@@ -105,6 +106,7 @@ void USubsystemManager::OnCreateSessionComplete_Internal(FName SessionName, bool
 			World->ServerTravel(TEXT("/Game/Maps/SessionRoomMap?listen"));	// TODO : Parameterize
 		}
 	}
+	*/
 }
 
 void USubsystemManager::FindSessions()

@@ -2,6 +2,7 @@
 
 #include "SteamTestGameMode.h"
 #include "SteamTestCharacter.h"
+#include "SubsystemManager.h"
 #include "UObject/ConstructorHelpers.h"
 
 ASteamTestGameMode::ASteamTestGameMode()
@@ -11,5 +12,16 @@ ASteamTestGameMode::ASteamTestGameMode()
 	if (PlayerPawnBPClass.Class != NULL)
 	{
 		DefaultPawnClass = PlayerPawnBPClass.Class;
+	}
+}
+
+void ASteamTestGameMode::BeginPlay()
+{
+	Super::BeginPlay();
+
+	auto SessionInterface = USubsystemManager::GetSessionInterface();
+	if (USubsystemManager* SubsystemManager = GetGameInstance()->GetSubsystem<USubsystemManager>())
+	{
+		SubsystemManager->CreateSession();
 	}
 }

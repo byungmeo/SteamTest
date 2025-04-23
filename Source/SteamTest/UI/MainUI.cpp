@@ -30,11 +30,15 @@ void UMainUI::NativeConstruct()
 
 void UMainUI::CreateSession()
 {
+	GetWorld()->ServerTravel(TEXT("/Game/Maps/SessionRoomMap?listen"));
+
+	/*
 	auto SessionInterface = USubsystemManager::GetSessionInterface();
 	if (USubsystemManager* SubsystemManager = GetGameInstance()->GetSubsystem<USubsystemManager>())
 	{
 		SubsystemManager->CreateSession();
 	}
+	*/
 }
 
 void UMainUI::FindAndJoinSession()

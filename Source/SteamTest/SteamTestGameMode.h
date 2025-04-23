@@ -13,6 +13,8 @@ class ASteamTestGameMode : public AGameModeBase
 
 public:
 	ASteamTestGameMode();
+
+	virtual void BeginPlay() override;
 };
 
 
